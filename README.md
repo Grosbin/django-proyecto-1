@@ -1,2 +1,2 @@
 # DjangoProyecto1
-Este en la primera vez que trabajo con Django :)
+Esta es la primera vez que trabajo con Django :)
