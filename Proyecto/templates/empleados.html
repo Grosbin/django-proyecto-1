@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}Empleados{% endblock %}
+{% block content %}
+
+<!--Inicio tabla-->
+<div class="container col-sm ">
+    <table class="table table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <!-- th scope="col">#</th> -->
+          <th scope="col">Id empleados</th>
+          <th scope="col">Id Cargo</th>
+          <th scope="col">Primer Nombre</th>
+           <th scope="col">Segundo Nombre</th>
+           <th scope="col">Primer Apellido</th>
+           <th scope="col">Segundo Apellido</th>
+           <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for empleado in empleados %}
+        <tr class="table table-success">
+          <td scope="row" >{{empleado.id_empleado}}</td>
+          <td >{{empleado.id_cargo}}</td>
+          <td>{{empleado.nombre1}}</td>
+          <td>{{empleado.nombre2}}</td>
+          <td>{{empleado.apellido1}}</td>
+          <td>{{empleado.apellido2}}</td>
+          <td>  <a href="/empleados/borrar/{{empleado.id_empleado}}" class="btn btn-danger btn-sm">Borrar <i class="fas fa-trash-alt"></i></a> </td>
+          {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+</div>
+<!-- Fin tabla-->
+
+<!-- Inicio Formulario-->
+<main>
+
+
+    <div class="bg-sucess row align-items-center justify-content-center vh-10">
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">
+            Agregar Empleado <i class="fas fa-plus-circle"></i>
+        </button>
+    </div>
+    
+
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="staticBackdropLabel">Ingrese Empleado</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+
+            <form action="/empleados/enviar/" method="post" class="needs-validation" novalidate>
+              {% csrf_token %}
+                <div class="form-row">
+                
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Id empleado</label>
+                    <input type="number" class="form-control" id="id"  name="id" required>
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                  
+                  <div class="form-group col-md-4">
+                    <label for="validationCustom01">Cargo</label>
+                    <select id="id_cargo" name="id_cargo" class="form-control" required>
+                      <option selected disabled >Seleccione</option>
+                      <option value="1">Administrador</option>
+                      <option value="2">Vendedor</option>
+                      <option value="3">Repartidor</option>
+                      <option value="4">Chef</option>
+                      <option value="5">Auxiliar de Cocina</option>
+                      <option value="6">Mercadeo</option>
+                   </select>
+                    <!-- Si lo mirar modifica despues quita estas validaciones -->
+                   <div class="valid-feedback">
+                      Valido!
+                  </div>
+                  <div class="invalid-feedback">
+                    Por favor ingrese un dato valido!
+                  </div>
+                </div>
+                  
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom02">Primer Nombre</label>
+                    <input type="text" class="form-control" id="nombre1" name="nombre1" required>
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom02">Segundo Nombre</label>
+                    <input type="text" class="form-control" id="nombre2" name="nombre2" >
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom02">Primer Apellido</label>
+                    <input type="text" class="form-control" id="apellido1" name="apellido1" required>
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="">Segundo Apellido</label>
+                    <input type="text" class="form-control" id="apellido2" name="apellido2" >
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+
+                <div  class="btn-toolbar">
+                  <button  href="{% url 'productos' %}" class="btn btn-primary mr-2 mb-2" type="submit" data-toggle="modal" >Enviar </button>
+                  <button type="button" class="btn btn-danger mr-2 mb-2" data-dismiss="modal">Salir</button>
+                </div>
+              </div>
+                </div> 
+              </form>
+      
+        </div>
+      </div>
+    </div>
+</main>
+
+
+
+<!-- Fin Formulario -->
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}Productos{% endblock %}
+{% block content %}
+
+<!--Inicio tabla-->
+<div class="container col-sm ">
+    <table class="table table-sm fixed_headerIventario">
+      <thead class="thead-dark">
+        <tr>
+          <!-- th scope="col">#</th> -->
+          <th scope="col">Id Productos</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Costos Indirectos</th>
+           <th scope="col">Porcentaje de Ganancia</th>
+           <th scope="col">Costo</th>
+           <th scope="col">Precio Unidad</th>
+           <th scope="col">Tipo Producto</th>
+           <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for producto in productos %}
+        <tr class="table-success">
+          <td scope="row" >{{producto.id_producto}}</td>
+          <td >{{producto.descripcion}}</td>
+          <td>{{producto.costos_indirectos}}</td>
+          <td>{{producto.porcentaje_ganancia}}</td>
+          <td>{{producto.costo}}</td>
+          <td>{{producto.precio_unidad}}</td>
+          <td>{{producto.id_tipo_producto}}</td>
+          <td>  <a href="/producto/borrar/{{producto.id_producto}}" class="btn btn-danger btn-sm">Borrar <i class="fas fa-trash-alt"></i></a> </td>
+          {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+</div>
+<!-- Fin tabla-->
+
+<!-- Inicio Formulario-->
+<main>
+
+
+    <div class="bg-sucess row align-items-center justify-content-center vh-10">
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">
+            Agregar Producto <i class="fas fa-plus-circle"></i>
+        </button>
+    </div>
+    
+
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="staticBackdropLabel">Ingrese Producto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+
+            <form action="/producto/enviar/" method="post" class="needs-validation" novalidate>
+              {% csrf_token %}
+                <div class="form-row">
+                
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Id Producto</label>
+                    <input type="number" class="form-control" id="id"  name="id" required>
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                  
+                      <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Descripcion</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom02">Costos Indirectos</label>
+                    <input type="number" class="form-control" id="costos_indirectos" name="costos_indirectos" required>
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom02">Porcentaje de Ganancia</label>
+                    <input type="number" class="form-control" id="porcentaje_ganancia" name="porcentaje_ganancia" required>
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom02">Costos</label>
+                    <input type="number" class="form-control" id="costos" name="costos" required>
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom02">Precio Unidad</label>
+                    <input type="number" class="form-control" id="precio_unidad" name="precio_unidad" required>
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+
+             
+                  <div class="form-group col-md-9">
+                    <label for="validationCustom01">Tipo</label>
+                    <select id="id_tipo_producto" name="id_tipo_producto" class="form-control" required>
+                      <option value="1">Bollito</option>
+                      <option value="2">Donas</option>
+                      <option value="3">Dulce Chocolate</option>
+                      <option value="4">Galleta Chocolate</option>
+                      <option value="5">Galleta Corazon</option>
+                      <option value="6">Galleta Limon</option>
+                      <option value="7">Pancakes</option>
+                      <option value="8">Pastel Amarillo</option>
+                      <option value="9">Pastel Chocolate Menta</option>
+                      <option value="10">Pastel Chocolate</option>
+                      <option value="11">Pastel Fresa</option>
+                      <option value="12">Pastel Vainilla</option>
+                      <option value="13">Pastelito Azul</option>
+                      <option value="14">Pastelito Rosado</option>
+                      <option value="15">Pastelito</option>
+                    </select>
+
+                </div>
+                <div  class="btn-toolbar">
+                  <button  href="{% url 'productos' %}" class="btn btn-primary mr-2 mb-2" type="submit" data-toggle="modal" >Enviar </button>
+                  <button type="button" class="btn btn-danger mr-2 mb-2" data-dismiss="modal">Salir</button>
+                </div>
+              </div>
+                </div> 
+              </form>
+      
+        </div>
+      </div>
+    </div>
+</main>
+
+
+
+<!-- Fin Formulario -->
+
+
+
+
+
+
+
+{% endblock %}

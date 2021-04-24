@@ -1,0 +1,28 @@
+{% extends "base.html" %} 
+{% block title %}Inicio{% endblock %} 
+{% block content %}
+<div class="container col-sm-10">
+  <div class="card-deck">
+    <!-- Inicio Card-->
+    {% for producto in productos %}
+    <div class="col mb-3" id="carta">
+      <div class="card" style="width: 10rem;">
+        {% for tipo in tipos %} 
+        {% if producto.id_tipo_producto == tipo.id_tipo_producto %}
+        <img src="../static/img/{{tipo.nombre}}.svg" class="card-img-top" />
+        {% endif %} 
+        {% endfor %}
+        <div id="compra" class="card-body">
+          <h5 class="card-title text-center">{{producto.descripcion}}</h5>
+          <a th:href="@{/empleados/listadoEmpleado}" class="btn btn-warning"
+            >Comprar</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <!-- Final Card-->
+  </div>
+</div>
+
+{% endblock %}

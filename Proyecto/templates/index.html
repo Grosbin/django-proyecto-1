@@ -1,0 +1,99 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="{https://fonts.googleapis.com/css2?family=Lora&family=Playfair+Display&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="{% static 'css/estilos.css' %}" rel="stylesheet" type="text/css" />
+    <!-- FONTAWESOME : https://kit.fontawesome.com/a23e6feb03.js -->
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+    crossorigin="anonymous"
+  />
+
+    <title>Pasteleria</title>
+  </head>
+  <body>
+    <div class="wrapper fixed-left">
+      <nav class="navbar navbar-expand-lg fixed-top">
+        <button id="sidebarCollapse" class="btn navbar-btn">
+          <i class="fas fa-birthday-cake"></i>
+        </button>
+        <a th:href="@{/}">Pastelria</a>
+      </nav>
+
+      <nav id="sidebar">
+        <div id="menuPrincipal" class="sidebar-header">
+          <h4>Menu Principal</h4>
+        </div>
+        <ul class="list-unstyled components">
+          <li>
+            <a href="{% url 'inicio' %}"><i class="fas fa-home"></i>Inicio</a>
+          </li>
+          <li>
+            <a th:href="@{/limpieza/listadoLimpieza}"
+              ><i class="fas fa-user-edit"></i>Empleados</a
+            >
+          </li>
+          <li>
+            <a th:href="@{/materiaPrima/listadoMateriaPrima}"
+              ><i class="fas fa-truck-moving"></i>Proveedores</a
+            >
+          </li>
+          <li>
+            <a href="{% url 'productos' %}"
+              ><i class="fas fa-tag"></i>Productos</a
+            >
+          </li>
+          <li>
+            <a th:href="@{/peces/listadoEnlatados}"
+              ><i class="fas fa-truck-loading"></i>Inventario</a
+            >
+          </li>
+          <li>
+            <a th:href="@{/peces/listadoEnlatados}"
+              ><i class="fas fa-shopping-cart"></i>Venta</a
+            >
+          </li
+        </ul>
+      </nav>
+<!--Contenido*/-->
+      <div id="content">
+    {% block content %}
+
+    {% endblock %}   
+<!-- Fin Contenido*/-->
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+    <script
+      src="https://kit.fontawesome.com/164e9e0a8c.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Proveedores{% endblock %}
+{% block content %}
+
+<!--Inicio tabla-->
+<div class="container col-sm ">
+    <table class="table table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <!-- th scope="col">#</th> -->
+          <th scope="col">Id Proveedores</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Telefono</th>
+           <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for proveedor in proveedores %}
+        <tr class="table table-success">
+          <td scope="row" >{{proveedor.id_proveedor}}</td>
+          <td >{{proveedor.nombre1}}</td>
+          <td>{{proveedor.telefono}}</td>
+          <td>  <a href="/proveedores/borrar/{{proveedor.id_proveedor}}" class="btn btn-danger btn-sm">Borrar <i class="fas fa-trash-alt"></i></a> </td>
+          {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+</div>
+<!-- Fin tabla-->
+
+<!-- Inicio Formulario-->
+<main>
+
+
+    <div class="bg-sucess row align-items-center justify-content-center vh-10">
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">
+            Agregar Proveedor <i class="fas fa-plus-circle"></i>
+        </button>
+    </div>
+    
+
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="staticBackdropLabel">Ingrese Proveedor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+
+            <form action="/proveedores/enviar/" method="post" class="needs-validation" novalidate>
+              {% csrf_token %}
+                <div class="form-row">
+                
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Id Proveedor</label>
+                    <input type="number" class="form-control" id="id"  name="id" required>
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                  
+                      <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom02">Telefono</label>
+                    <input type="text" class="form-control" id="telefono" name="telefono" required>
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                </div> 
+                <div>
+                  <div  class="btn-toolbar">
+                    <button  href="{% url 'productos' %}" class="btn btn-primary mr-2 mb-2" type="submit" data-toggle="modal" >Enviar </button>
+                    <button type="button" class="btn btn-danger mr-2 mb-2" data-dismiss="modal">Salir</button>
+                  </div>
+
+            </div>
+              </form>
+        </div>
+      </div>
+    </div>
+</main>
+
+
+
+<!-- Fin Formulario -->
+
+
+
+
+
+
+
+{% endblock %}

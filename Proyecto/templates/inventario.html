@@ -1,0 +1,336 @@
+{% extends "base.html" %}
+
+{% block title %}Inventario{% endblock %}
+{% block content %}
+
+
+<div class="text-center">
+    <div class="card-header bg-dark ">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href=""><i class="fas fa-chart-pie"></i> Inventario</a>
+        </li>
+      
+      </ul>
+    </div>
+    <div class="">
+      <table class="table table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <!-- th scope="col">#</th> -->
+            <th scope="col">Id Inventario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Unidad</th>
+             <th scope="col">Precio</th>
+             <th scope="col">Cantidad</th>
+             <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for inventario in inventarios %}
+          <tr class="table table-success">
+            <td >{{inventario.id_inventario}}</td>
+            <td >{{inventario.descripcion}}</td>
+            <td>{{inventario.unidad}}</td>
+            <td>{{inventario.precio}}</td>
+            <td>{{inventario.cantidad}}</td>
+            <td>  <a href="/inventario/borrar/{{inventario.id_inventario}}" class="btn btn-danger btn-sm">Borrar <i class="fas fa-trash-alt"></i></a> </td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+
+      <main>
+
+
+        <div class="bg-sucess row align-items-center justify-content-center vh-10">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">
+                Agregar <i class="fas fa-plus-circle"></i>
+            </button>
+        </div>
+        
+    
+      <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="staticBackdropLabel">Ingrese Producto</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+    
+                <form action="/inventario/enviar/" method="post" class="needs-validation" novalidate>
+                  {% csrf_token %}
+                    <div class="form-row">
+                    
+                      <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Id Inventario</label>
+                        <input type="number" class="form-control" id="id"  name="id" required>
+                        <div class="valid-feedback">
+                            Valido!
+                        </div>
+                        <div class="invalid-feedback">
+                          Por favor ingrese un dato valido!
+                        </div>
+                      </div>
+                      
+                          <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Nombre</label>
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                        <div class="valid-feedback">
+                            Valido!
+                        </div>
+                        <div class="invalid-feedback">
+                          Por favor ingrese un dato valido!
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-6 mb-3">
+                        <label for="validationCustom02">Unidad</label>
+                        <input type="number" class="form-control" id="unidad" name="unidad" required>
+                        <div class="valid-feedback">
+                            Valido!
+                        </div>
+                        <div class="invalid-feedback">
+                          Por favor ingrese un dato valido!
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="validationCustom02">Precio</label>
+                        <input type="number" class="form-control" id="precio" name="precio" required>
+                        <div class="valid-feedback">
+                            Valido!
+                        </div>
+                        <div class="invalid-feedback">
+                          Por favor ingrese un dato valido!
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="validationCustom02">Cantidad</label>
+                        <input type="number" class="form-control" id="cantidad" name="cantidad" required>
+                        <div class="valid-feedback">
+                            Valido!
+                        </div>
+                        <div class="invalid-feedback">
+                          Por favor ingrese un dato valido!
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="validationCustom02">id_proveedor</label>
+                        <input type="number" class="form-control" id="id_proveedor" name="id_proveedor" required>
+                        <div class="valid-feedback">
+                            Valido!
+                        </div>
+                        <div class="invalid-feedback">
+                          Por favor ingrese un dato valido!
+                        </div>
+                      </div>
+                 
+                  </div>
+
+                  <div  class="btn-toolbar">
+                    <button  href="{% url 'inventario' %}" class="btn btn-primary mr-2 mb-2" type="submit" data-toggle="modal" >Enviar </button>
+                    <button type="button" class="btn btn-danger mr-2 mb-2" data-dismiss="modal">Salir</button>
+                  </div>
+                    </div> 
+                  </form>
+          
+            </div>
+          </div>
+        </div>
+
+
+        <div class="d-flex flex-row align-items-center justify-content-between" >
+
+
+
+          <div class="tablita text-center" id="tabla2" style='margin: 10px; padding: 5px; text-align: left;  width: 28rem;'>
+              <!-- Card Header - Dropdown -->
+              
+              <div
+                class="card-header  bg-dark py-1 d-flex flex-row align-items-center justify-content-between"
+              >
+          
+                <i id="iconitoTabla" class="fas fa-hands-helping" style="color:aliceblue"></i>
+                <a id="enlacesNavbar"  href="{% url 'inicio' %}"> Inventario Proveedor</a>
+             
+                <div class="dropdown no-arrow">
+                  <a
+                    class="dropdown-toggle"
+                    href="#"
+                    role="button"
+                    id="dropdownMenuLink"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <i
+                      class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"
+                    ></i>
+                  </a>
+                  <div
+                    class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                    aria-labelledby="dropdownMenuLink"
+                  >
+                    <div class="dropdown-header">Dropdown Header:</div>
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#"
+                      >Something else here</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <!-- Card Body -->
+              <table class="table table-sm">
+                <thead class="thead-dark">
+                  <tr>
+                    <!-- th scope="col">#</th> -->
+                    <th scope="col">Id Inventario</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Id Proveedor</th>
+                    <th scope="col">Nombre Proveedor</th>
+                     <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for inventario in inventarios_proveedores %}
+                  <tr class="table table-success">
+                    <td >{{inventario.id_inventario}}</td>
+                    <td >{{inventario.descripcion}}</td>
+                    <td >{{inventario.id_proveedor}}</td>
+                    <td >{{inventario.nombre1}}</td>
+                    <td></td>
+                   <!-- <td>  <a href="/inventario/borrar/{{inventario.id_inventario}}" class="btn btn-danger btn-sm">Borrar <i class="fas fa-trash-alt"></i></a> </td> -->
+                    {% endfor %}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+      
+      
+          <div class=" " id="tabla2" style='margin: 10px; padding: 5px; text-align: left;  width: 28rem;'>
+            <!-- Card Header - Dropdown -->
+            <div
+              class="card-header  bg-dark py-1 d-flex flex-row align-items-center justify-content-between"
+            >
+              <h6 class="m-0 font-weight-bold text-primary">
+                Tabla 2
+              </h6>
+              <div class="dropdown no-arrow">
+                <a
+                  class="dropdown-toggle"
+                  href="#"
+                  role="button"
+                  id="dropdownMenuLink"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i
+                    class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"
+                  ></i>
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                  aria-labelledby="dropdownMenuLink"
+                >
+                  <div class="dropdown-header">Dropdown Header:</div>
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#"
+                    >Something else here</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+              <div class="chart-pie pt-3 pb-1">
+                <canvas id="myPieChart"></canvas>
+              </div>
+        
+            </div>
+          </div>
+      
+      
+      
+      
+          <div class="" id="tabla2" style='margin: 4px; padding: 5px; text-align: left;  width: 15rem;'>
+            <!-- Card Header - Dropdown -->
+            <div
+              class="card-header  bg-dark py-1 d-flex flex-row align-items-center justify-content-between"
+            >
+              <h6 class="m-0 font-weight-bold text-primary">
+                Tabla 2
+              </h6>
+              <div class="dropdown no-arrow">
+                <a
+                  class="dropdown-toggle"
+                  href="#"
+                  role="button"
+                  id="dropdownMenuLink"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i
+                    class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"
+                  ></i>
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                  aria-labelledby="dropdownMenuLink"
+                >
+                  <div class="dropdown-header">Dropdown Header:</div>
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#"
+                    >Something else here</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+              <div class="chart-pie pt-3 pb-1">
+                <canvas id="myPieChart"></canvas>
+              </div>
+              
+            </div>
+          </div>
+      
+       
+      </div>
+
+
+
+    </main>
+   
+    
+
+
+
+
+
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

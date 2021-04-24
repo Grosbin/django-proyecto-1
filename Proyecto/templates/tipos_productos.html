@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Tipo Producto{% endblock %}
+{% block content %}
+
+<!--Inicio tabla-->
+<div class="container col-mx-5 ">
+    <table class="table table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <!-- th scope="col">#</th> -->
+          <th scope="col">Id Tipo Productos</th>
+          <th scope="col">Nombre</th>
+           <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for producto in tipos_productos %}
+        <tr class="table table-success">
+          <td scope="row" >{{producto.id_tipo_producto}}</td>
+          <td >{{producto.nombre}}</td>
+          <td>  <a href="/tipo_producto/borrar/{{producto.id_tipo_producto}}" class="btn btn-danger btn-sm">Borrar <i class="fas fa-trash-alt"></i></a> </td>
+          {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+</div>
+<!-- Fin tabla-->
+
+<!-- Inicio Formulario-->
+<main>
+
+
+    <div class="bg-sucess row align-items-center justify-content-center vh-10">
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">
+            Agregar Tipo Producto <i class="fas fa-plus-circle"></i>
+        </button>
+    </div>
+    
+
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="staticBackdropLabel">Ingrese Producto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+
+            <form action="/tipos_producto/enviar/" method="post" class="needs-validation" novalidate>
+              {% csrf_token %}
+                <div class="form-row">
+                
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Id Tipo Producto</label>
+                    <input type="number" class="form-control" id="id"  name="id" required>
+                    
+                    <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                    <div class="form-group col-md-4">
+                      <label for="validationCustom01">Tipo</label>
+                      <select id="nombre" name="nombre" class="form-control" required>
+                        <option value="bollito">Bollito</option>
+                        <option value="donas">Donas</option>
+                        <option value="dulce_chocolate">Dulce Chocolate</option>
+                        <option value="galleta_chocolate">Galleta Chocolate</option>
+                        <option value="galleta_corazon">Galleta Corazon</option>
+                        <option value="galleta_limon">Galleta Limon</option>
+                        <option value="pancakes">Pancakes</option>
+                        <option value="pastel_amarillo">Pastel Amarillo</option>
+                        <option value="pastel_chocolate_menta">Pastel Chocolate Menta</option>
+                        <option value="pastel_chocolate">Pastel Chocolate</option>
+                        <option value="pastel_fresa">Pastel Fresa</option>
+                        <option value="pastel_vainilla">Pastel Vainilla</option>
+                        <option value="pastelito_azul">Pastelito Azul</option>
+                        <option value="pastelito_rosado">Pastelito Rosado</option>
+                        <option value="pastelito">Pastelito</option>
+                      </select>
+
+                      <!-- Si lo mirar modifica despues quita estas validaciones -->
+                     <div class="valid-feedback">
+                        Valido!
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor ingrese un dato valido!
+                    </div>
+                  </div>
+                  
+              
+                  
+                </div>
+               <div class="col-md-6 mb-3">
+
+                 <div  class="row col-ml-1 ">
+                   <button  href="{% url 'tipo_producto' %}" class="btn btn-primary mr-2 mb-2" type="submit" data-toggle="modal" >Enviar </button>
+                   <button type="button" class="btn btn-danger mr-2 mb-2" data-dismiss="modal">Salir</button>
+                 </div>
+
+
+               </div> 
+   
+              </form>
+              
+      
+        </div>
+      </div>
+    </div>
+</main>
+
+
+
+<!-- Fin Formulario -->
+
+
+
+
+
+
+
+{% endblock %}
